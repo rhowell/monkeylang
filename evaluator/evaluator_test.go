@@ -1,10 +1,11 @@
 package evaluator
 
 import (
+	"testing"
+
 	"monkey/lexer"
 	"monkey/object"
 	"monkey/parser"
-	"testing"
 )
 
 func TestEvalIntegerExpression(t *testing.T) {
@@ -300,4 +301,16 @@ func TestFunctionApplication(t *testing.T) {
 	for _, tt := range tests {
 		testIntegerObject(t, testEval(tt.input), tt.expected)
 	}
+}
+
+func TestClosures(t *testing.T) {
+	input := `
+	let newAdder = fn(x) {
+	  fn(y) { x + y };
+	};
+	
+	let addTwo = newAdder(2);
+	addTwo(2);`
+
+	testIntegerObject(t, testEval(input), 4)
 }
