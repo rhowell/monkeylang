@@ -3,8 +3,9 @@ package object
 import (
 	"bytes"
 	"fmt"
-	"monkey/ast"
 	"strings"
+
+	"monkey/ast"
 )
 
 type ObjectType string
@@ -12,6 +13,7 @@ type ObjectType string
 const (
 	INTEGER_OBJ      = "INTEGER"
 	BOOLEAN_OBJ      = "BOOLEAN"
+	STRING_OBJ       = "STRING"
 	NULL_OBJ         = "NULL"
 	RETURN_VALUE_OBJ = "RETURN_VALUE"
 	ERROR_OBJ        = "ERROR"
@@ -29,6 +31,10 @@ type Integer struct {
 
 type Boolean struct {
 	Value bool
+}
+
+type String struct {
+	Value string
 }
 
 type Null struct{}
@@ -81,3 +87,6 @@ func (f *Function) Inspect() string {
 }
 
 func (f *Function) Type() ObjectType { return FUNCTION_OBJ }
+
+func (s *String) Type() ObjectType { return STRING_OBJ }
+func (s *String) Inspect() string  { return s.Value }
