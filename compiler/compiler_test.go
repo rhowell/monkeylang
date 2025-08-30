@@ -102,6 +102,9 @@ func runCompilerTests(t *testing.T, tests []compilerTestCase) {
 		}
 
 		err = testConstants(t, tt.expectedConstants, bytecode.Constants)
+		if err != nil {
+			t.Fatalf("testConstants failed: %s", err)
+		}
 	}
 }
 
