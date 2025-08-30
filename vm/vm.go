@@ -21,6 +21,7 @@ type VM struct {
 var (
 	True  = &object.Boolean{Value: true}
 	False = &object.Boolean{Value: false}
+	Null  = &object.Null{}
 )
 
 func New(bytecode *compiler.Bytecode) *VM {
@@ -57,7 +58,7 @@ func (vm *VM) Run() error {
 		case code.OpAdd, code.OpSub, code.OpMul, code.OpDiv:
 			err := vm.executeBinaryOperation(op)
 			if err != nil {
-				return nil
+				return err
 			}
 		case code.OpTrue:
 			err := vm.push(True)
@@ -96,6 +97,11 @@ func (vm *VM) Run() error {
 			condition := vm.pop()
 			if !isTruthy(condition) {
 				ip = pos - 1
+			}
+		case code.OpNull:
+			err := vm.push(Null)
+			if err != nil {
+				return err
 			}
 		}
 	}
@@ -203,9 +209,10 @@ func nativeBoolToBooleanObject(input bool) *object.Boolean {
 
 func (vm *VM) executeBangOperator() error {
 	operand := vm.pop()
-	if operand == False {
+	switch operand {
+	case False, Null:
 		return vm.push(True)
-	} else {
+	default:
 		return vm.push(False)
 	}
 }

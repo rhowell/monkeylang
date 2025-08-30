@@ -21,6 +21,7 @@ const (
 
 	OpTrue
 	OpFalse
+	OpNull
 
 	OpEqual
 	OpNotEqual
@@ -46,9 +47,9 @@ var definitions = map[Opcode]*Definition{
 	OpSub:           {"OpSub", []int{}},
 	OpMul:           {"OpMul", []int{}},
 	OpDiv:           {"OpDiv", []int{}},
-	OpPop:           {"OpPop", []int{}},
 	OpTrue:          {"OpTrue", []int{}},
 	OpFalse:         {"OpFalse", []int{}},
+	OpNull:          {"OpNull", []int{}},
 	OpEqual:         {"OpEqual", []int{}},
 	OpNotEqual:      {"OpNotEqual", []int{}},
 	OpGreaterThan:   {"OpGreaterThan", []int{}},
@@ -56,6 +57,7 @@ var definitions = map[Opcode]*Definition{
 	OpBang:          {"OpBang", []int{}},
 	OpJumpNotTruthy: {"OpJumpNotTruthy", []int{2}},
 	OpJump:          {"OpJump", []int{2}},
+	OpPop:           {"OpPop", []int{}},
 }
 
 func Lookup(op byte) (*Definition, error) {
