@@ -13,6 +13,7 @@ type (
 
 const (
 	OpConstant Opcode = iota
+	OpArray
 
 	OpAdd
 	OpSub
@@ -46,6 +47,7 @@ type Definition struct {
 
 var definitions = map[Opcode]*Definition{
 	OpConstant:      {"OpConstant", []int{2}},
+	OpArray:         {"OpArray", []int{2}},
 	OpAdd:           {"OpAdd", []int{}},
 	OpSub:           {"OpSub", []int{}},
 	OpMul:           {"OpMul", []int{}},
