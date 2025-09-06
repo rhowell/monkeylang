@@ -125,6 +125,7 @@ func (vm *VM) Run() error {
 			globalIndex := code.ReadUint16(vm.instructions[ip+1:])
 			ip += 2
 
+
 			err := vm.push(vm.globals[globalIndex])
 			if err != nil {
 				return err
