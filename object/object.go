@@ -89,6 +89,7 @@ type Hash struct {
 
 type CompiledFunction struct {
 	Instructions code.Instructions
+	NumLocals    int
 }
 
 func (i *Integer) Inspect() string  { return fmt.Sprintf("%d", i.Value) }
@@ -185,5 +186,5 @@ func (h *Hash) Inspect() string {
 
 func (cf *CompiledFunction) Type() ObjectType { return COMPILED_FUNCTION_OBJ }
 func (cf *CompiledFunction) Inspect() string {
-	return fmt.Sprintf("COmpiledFunction[%p]", cf)
+	return fmt.Sprintf("CompiledFunction[%p]", cf)
 }
