@@ -88,8 +88,9 @@ type Hash struct {
 }
 
 type CompiledFunction struct {
-	Instructions code.Instructions
-	NumLocals    int
+	Instructions  code.Instructions
+	NumLocals     int
+	NumParameters int
 }
 
 func (i *Integer) Inspect() string  { return fmt.Sprintf("%d", i.Value) }
